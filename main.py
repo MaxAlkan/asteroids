@@ -43,11 +43,13 @@ def main():
                 log_event("player_hit")
                 print("Game Over!")
                 sys.exit()
-        for asteroid in asteroids:
-            for shot in shots:
+        #Changed to list(...) This creates a local copy of the asteroids and shots containers to be updated as player shots
+        for asteroid in list(asteroids):
+            for shot in list(shots):
                 if shot.collides_with(asteroid):
-                    log_event("asteroid_shot")
-                    asteroid.kill() 
+                    log_event("asteroid_split")
+                    asteroid.split()
+                    shot.kill()
         for drawable_obj in drawable:
             drawable_obj.draw(screen)
         pygame.display.flip()
